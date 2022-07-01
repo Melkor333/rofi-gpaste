@@ -1,4 +1,5 @@
-#!/bin/sh
+#! /usr/bin/env nix-shell
+#! nix-shell -i sh -p gnome.gpaste xsel xdotool xorg.xprop gawk qrencode coreutils gnused
 # Rofi frontend for GPaste.
 # Dependencies:
 #   rofi, gpaste, xsel, xdotool, xprop, awk, sed, coreutils
@@ -71,7 +72,7 @@ usage() {
 }
 
 # Start the daemon if it's not running
-pidof -q gpaste-daemon || setsid -f gpaste-client daemon >/dev/null 2>&1
+pidof gpaste-daemon >/dev/null || setsid -f gpaste-client daemon >/dev/null 2>&1
 
 print_history() {
 	gpaste-client --oneline |
